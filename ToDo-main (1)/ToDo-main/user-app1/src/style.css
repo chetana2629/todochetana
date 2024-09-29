@@ -1,6 +1,6 @@
-.header{
-    background-color: aqua;
-}
+/* .header{
+    background-color: rgb(115, 129, 129);
+} */
 
 .myForm{
     margin: auto;
@@ -8,7 +8,7 @@
     border: solid 1px;
 }
 
-.footer{
-    background-color: lightcoral;
+/* .footer{
+    background-color: rgb(97, 84, 84);
     height: 50px;
-}
+} */

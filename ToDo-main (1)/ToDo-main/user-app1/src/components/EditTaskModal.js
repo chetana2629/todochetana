@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function EditTaskModal({ show, onClose, task }) {
   const [a_assignedTo, setAssignedTo] = useState('');
@@ -28,6 +29,7 @@ export default function EditTaskModal({ show, onClose, task }) {
       comments: c_comments
     }).then((response) => {
       console.log(response.data);
+      window.location.reload();
       onClose(); // Close the modal after successful update
     }).catch((error) => {
       console.log(error);
@@ -85,7 +87,8 @@ export default function EditTaskModal({ show, onClose, task }) {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
-                <button type="submit" className="btn btn-primary" onClick={handleUpdate}>Save changes</button>
+                <Link to=""><button type="submit" className="btn btn-primary" onClick={handleUpdate}>Save changes</button></Link>
+
               </div>
             </div>
           </div>

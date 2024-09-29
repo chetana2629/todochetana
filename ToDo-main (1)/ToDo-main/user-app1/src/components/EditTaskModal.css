@@ -1,0 +1,31 @@
+.modal-sm {
+    max-width: 400px; /* Adjust the size of the modal */
+  }
+  
+  .modal-content {
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  .modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-header .btn-close {
+    background-color: white;
+    border: none;
+  }
+  
+  .modal-body .form-select, .modal-body .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .modal-footer .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .modal-footer .btn-secondary {
+    background-color: #6c757d;
+  }
+  

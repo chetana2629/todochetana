@@ -1,0 +1,199 @@
+/* Background Image */
+body {
+    background-image: url('../assets/background.jpg'); /* Adjust the path to your image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the image fixed during scrolling */
+    min-height: 100vh; /* Ensures the full height */
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .background-container {
+    min-height: 100vh; /* Ensures container takes full height */
+    padding: 20px;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar h5 {
+    margin-bottom: 0;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .navbar small {
+    color: #666;
+  }
+  
+  .navbar .btn {
+    margin-left: 10px;
+  }
+  
+  .position-relative {
+    margin-left: auto;
+    width: 250px;
+  }
+  
+  .position-relative .form-control {
+    padding-right: 30px;
+  }
+  
+  .position-relative .fa-search {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #6c757d;
+  }
+  
+  /* Table Styles */
+  .table {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .table thead {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .table th, .table td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  .table td {
+    background-color: #f9f9f9;
+  }
+  
+  .table .form-check-input {
+    margin: 0;
+  }
+  
+  /* Dropdown Button */
+  .dropdown .btn-light {
+    border: none;
+    background-color: transparent;
+  }
+  
+  .dropdown .dropdown-menu {
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown .dropdown-item {
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .dropdown .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pagination .page-size {
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  .pagination input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Edit Modal (If applicable) */
+  .modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+  }
+  
+  .modal-footer .btn {
+    padding: 5px 15px;
+  }
+  
+  /* General Button Styles */
+  .btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  

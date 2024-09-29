@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks, faSearch } from '@fortawesome/free-solid-svg-icons';
-import EditTaskModal from './EditTaskModal';
-import { Link } from 'react-router-dom';
-
- // Import the modal component
+import EditTaskModal from './EditTaskModal'; // Import if you have it
+import DeleteConfirmationModal from './DeleteConfirmationModal'; // Import the new modal
+import './List.css';
 
 export default function List() {
   const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState(null); // Track the task to be edited
+  const [taskToEdit, setTaskToEdit] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [taskIdToDelete, setTaskIdToDelete] = useState(null);
 
-  
   const getTasks = () => {
     axios.get('http://localhost:8080/api/tasks')
       .then((response) => {
@@ -23,91 +21,72 @@ export default function List() {
   };
 
   const handleEdit = (task) => {
-    setTaskToEdit(task); // Set the selected task to be edited
-    setShowModal(true);  // Show the modal
+    setTaskToEdit(task);
+    setShowModal(true);
   };
 
-  const handleDelete = (id) => {
-    console.log('Deleting task with ID:', id);
-    axios.delete(`http://localhost:8080/api/tasks/${id}`)
+  const handleDeleteClick = (taskId) => {
+    setTaskIdToDelete(taskId);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    axios.delete(`http://localhost:8080/api/tasks/${taskIdToDelete}`)
       .then((response) => {
-        // Assuming the response.data contains the updated tasks list after deletion
-        // Alternatively, you can remove the deleted task from the local state manually
-        setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
-       
-        alert("Do you want to delete task {{task.name}}"); // Optional: alert to confirm deletion
+        setTasks(prevTasks => prevTasks.filter(task => task.id !== taskIdToDelete));
+        setShowDeleteModal(false);
       })
       .catch((error) => {
         console.log(error);
-        alert("Error deleting the task."); // Optional: alert for error
+        alert("Error deleting the task.");
       });
   };
-  
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
+  };
+
   useEffect(() => {
     getTasks();
-    
   }, []);
 
   return (
     <>
-      <nav className="navbar bg-body-tertiary">
-        <div className="container-fluid">
-          <div className="d-flex align-items-center">
-            <FontAwesomeIcon icon={faTasks} className="text-danger me-2" size="2x" />
-            <div>
-              <h5 className="mb-0">Tasks</h5>
-              <small className="text-muted">All Tasks</small>
-              
-            </div>
-          </div>
-          <div className="btn-group" role="group" aria-label="Basic example">
-            <Link to="/add"><button type="button" className="btn btn-primary">New Task</button></Link>
-            <Link to="/list"><button type="button" className="btn btn-primary">Refresh</button></Link>
-          </div>
-        </div>
-        <div className="position-relative" style={{ marginLeft: 'auto' }}>
-          <input type="text" placeholder="Search" className="form-control" />
-          <FontAwesomeIcon icon={faSearch} className="position-absolute" style={{ right: '10px', top: '10px', color: '#6c757d' }} />
-        </div>
-
-    
-        
-      </nav>
-
       <div className="container mt-3 mb-3">
         <div className="row mt-3 mb-3">
           <table className="table">
             <thead>
               <tr>
-              <th scope="col">
+                <th scope="col">
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   </div>
                 </th>
-               
                 <th>Assigned To</th>
                 <th>Status</th>
                 <th>Due Date</th>
                 <th>Priority</th>
                 <th>Comments</th>
-              
-              </tr>
-            </thead>
+                <th>
+                     <img src={require('../assets/menu3.png')} alt="" style={{width: '20px', height: '20px'}} />
+                 </th>
+                </tr>
+              </thead>
             <tbody>
               {tasks.map((task, index) => (
                 <tr key={index}>
-                  <td>{<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                }</td>
+                  <td>
+                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  </td>
                   <td>{task.assignedTo}</td>
                   <td>{task.status}</td>
                   <td>{task.dueDate}</td>
                   <td>{task.priority}</td>
                   <td>{task.comments}</td>
                   <td>
-                    {/* Edit/Delete Dropdown */}
                     <div className="dropdown">
                       <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        
+                        changes
                       </button>
                       <ul className="dropdown-menu">
                         <li>
@@ -116,7 +95,7 @@ export default function List() {
                           </button>
                         </li>
                         <li>
-                          <button className="dropdown-item" onClick={() => handleDelete(task.id)}>
+                          <button className="dropdown-item " onClick={() => handleDeleteClick(task.id)}>
                             Delete
                           </button>
                         </li>
@@ -129,32 +108,23 @@ export default function List() {
           </table>
         </div>
       </div>
-              
-      <div className="pagination">
-        <select className="page-size">
-          <option value="10">10</option>
-          <option value="20" selected>20</option>
-          <option value="50">50</option>
-        </select>
-        <div style={{ marginLeft: '595px' }}>
-          <button type="button" className="first-page">First</button>
-          <button type="button" className="prev-page">Prev</button>
-          <input type="number" className="page-number" value="1" min="1" />
-          <button type="button" className="next-page">Next</button>
-          <button type="button" className="last-page">Last</button>
-        </div>
-      </div>
 
       {/* Render the Edit Modal */}
       {showModal && (
         <EditTaskModal
-        show={showModal}
-        onClose={() => setShowModal(false)}
-        task={taskToEdit} // Pass the selected task to the modal
-    
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          task={taskToEdit}
         />
+      )}
 
-
+      {/* Render the Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <DeleteConfirmationModal
+          show={showDeleteModal}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
       )}
     </>
   );
